@@ -40,7 +40,16 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // TODO: update a tag's name by its `id` value
+  // TODO: figure out how to test this: update a tag's name by its `id` value
+  Tag.update(
+    {
+      tag_name: req.body.tag_name
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    })
 });
 
 router.delete('/:id', async (req, res) => {
