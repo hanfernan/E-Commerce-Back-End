@@ -54,11 +54,11 @@ You’ll need to use the [MySQL2](https://www.npmjs.com/package/mysql2) and [Seq
 
 Use the `schema.sql` file in the `db` folder to create your database with MySQL shell commands. Use environment variables to store sensitive data like your MySQL username, password, and database name.
 
+<!-- DONE================================================================================================= -->
 ### Database Models
 
-Your database should contain the following four models, including the requirements listed for each model:
+<!-- Your database should contain the following four models, including the requirements listed for each model:
 
-<!-- DONE -->
 * `Category`
 
   * `id`
@@ -77,7 +77,6 @@ Your database should contain the following four models, including the requiremen
   
     * Doesn't allow null values.
 
-<!-- TODO: NEED TO ADD TO -->
 * `Product`
 
   * `id`
@@ -120,7 +119,6 @@ Your database should contain the following four models, including the requiremen
   
     * References the `Category` model's `id`.
 
-<!-- DONE -->
 * `Tag`
 
   * `id`
@@ -136,7 +134,7 @@ Your database should contain the following four models, including the requiremen
   * `tag_name`
   
     * String.
-<!-- DONE -->
+
 * `ProductTag`
 
   * `id`
@@ -159,8 +157,8 @@ Your database should contain the following four models, including the requiremen
 
     * Integer.
 
-    * References the `Tag` model's `id`.
-
+    * References the `Tag` model's `id`. -->
+<!-- ============================================================================================================================== -->
 ### Associations
 
 You'll need to execute association methods on your Sequelize models to create the following relationships between them:
