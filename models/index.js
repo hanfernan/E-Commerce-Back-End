@@ -24,7 +24,6 @@ Product.belongsToMany(Tag, {
 });
 
 // Tags belongToMany Products (through ProductTag)
-//TODO: Why is this the exact same as tag route?
 Tag.belongsToMany(Product, {
   through: {
     model: ProductTag

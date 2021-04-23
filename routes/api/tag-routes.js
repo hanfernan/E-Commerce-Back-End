@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
   const tags = await Tag.findAll({
     //inner join with produce
     //be sure to include its associated Product data
-    //TODO: same????
     include: [{ model: Product, through: ProductTag, as: 'all_tags' }]
   })
   console.log(tags);
@@ -17,13 +16,15 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  // TODO: associated product data
-  //find a single tag by its `id`
-  Tag.findByPk(req.params.id).then((tagData) => {
-    //include: [{ model: Product, through: ProductTag, as: 'all_tags' }]
+  //WORKS: find a single tag by its `id`
+  //be sure to include its associated Product data
+  Tag.findByPk(req.params.id, {
+    include: [{ model: Product, through: ProductTag, as: 'all_tags' }]
+  }).then((tagData) => {
+
     res.json(tagData);
   });
-  //be sure to include its associated Product data
+
 });
 
 router.post('/', async (req, res) => {
