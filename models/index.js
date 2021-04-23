@@ -30,6 +30,7 @@ Tag.belongsToMany(Product, {
     model: ProductTag
   },
   as: 'all_tags'
+  // foreignKey: 'product_tag'
 });
 
 module.exports = {
