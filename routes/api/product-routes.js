@@ -26,7 +26,6 @@ router.get('/:id', (req, res) => {
   });
 });
 
-//TODO: do we need to fix this at all??
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -36,27 +35,21 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  Product.create({
-    product_name: req.body.product_name,
-    price: req.body.price,
-    stock: req.body.stock,
-  })
-    //I tried wrapping this in a .then but that doesn't seem to work
-    .then(Product.create(req.body)
-      .then((product) => {
-        // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-        if (req.body.tagIds.length) {
-          const productTagIdArr = req.body.tagIds.map((tag_id) => {
-            return {
-              product_id: product.id,
-              tag_id,
-            };
-          });
-          return ProductTag.bulkCreate(productTagIdArr);
-        }
-        // if no product tags, just respond
-        res.status(200).json(product);
-      }))
+  Product.create(req.body)
+    .then((product) => {
+      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+      if (req.body.tagIds.length) {
+        const productTagIdArr = req.body.tagIds.map((tag_id) => {
+          return {
+            product_id: product.id,
+            tag_id,
+          };
+        });
+        return ProductTag.bulkCreate(productTagIdArr);
+      }
+      // if no product tags, just respond
+      res.status(200).json(product);
+    })
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
       console.log(err);
@@ -107,7 +100,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  //TODO: DOUBLE CHECK AFTER CREATE IS FIXED delete one product by its `id` value
+  //WORKS delete one product by its `id` value
   try {
     const productData = await Product.destroy({
       where: {
