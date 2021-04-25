@@ -5,8 +5,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', async (req, res) => {
-  // WORKS find all products
-  // be sure to include its associated Category and Tag data
+  //find all products
   const products = await Product.findAll({
     include: [{ model: Tag, through: ProductTag, as: 'tagged_products' }]
   })
@@ -16,8 +15,7 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', (req, res) => {
-  //WORKS find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  //find a single product by its `id`
   Product.findByPk(req.params.id, {
     include: [{ model: Tag, through: ProductTag, as: 'tagged_products' }]
   }).then((productData) => {
@@ -29,10 +27,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
+      "product_name": "Basketball",
+      "price": 200.00,
+      "stock": 3,
+      "tagIds": [1, 2, 3, 4]
     }
   */
   Product.create(req.body)
@@ -100,7 +98,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  //WORKS delete one product by its `id` value
+  //delete one product by its `id` value
   try {
     const productData = await Product.destroy({
       where: {
